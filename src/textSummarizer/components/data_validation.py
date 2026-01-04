@@ -15,8 +15,9 @@ class DataValidation:
             )
 
             validation_status = all(
-                file in self.config.ALL_REQUIRED_FILES for file in all_files
-            )
+            req_file in all_files
+            for req_file in self.config.ALL_REQUIRED_FILES
+             )
 
             # ✅ CREATE DIRECTORY IF NOT EXISTS
             status_file_path = Path(self.config.STATUS_FILE)
