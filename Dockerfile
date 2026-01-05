@@ -1,20 +1,21 @@
-FROM python:3.13-slim
+FROM python:3.11-slim
 
-# Prevent Python from writing pyc files
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-# System dependencies (needed for tokenizers, sentencepiece, etc.)
+# System dependencies for tokenizers & HF
 RUN apt-get update && apt-get install -y \
     build-essential \
     git \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy and install dependencies first (better Docker caching)
+# Copy requirements first (Docker cache optimization)
 COPY requirements.txt .
 
+RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy project files
