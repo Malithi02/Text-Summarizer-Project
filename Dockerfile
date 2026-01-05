@@ -21,6 +21,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy project files
 COPY . .
 
+# This installs your local project so Python can find 'textSummarizer'
+RUN pip install -e . 
+# ---------------------
+
 EXPOSE 8080
 
 CMD ["python", "app.py"]
