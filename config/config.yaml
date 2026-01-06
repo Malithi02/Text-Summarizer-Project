@@ -34,9 +34,20 @@ model_trainer:
 
 
 
+#model_evaluation:
+#  root_dir: artifacts/model_evaluation
+ # data_path: artifacts/data_transformation/samsum_dataset
+ # model_path: artifacts/model_trainer/pegasus-samsum-model
+ # tokenizer_path: artifacts/model_trainer/pegasus-samsum-tokenizer
+ # metric_file_name: artifacts/model_evaluation/metrics.csv
+
 model_evaluation:
   root_dir: artifacts/model_evaluation
   data_path: artifacts/data_transformation/samsum_dataset
-  model_path: artifacts/model_trainer/pegasus-samsum-model
-  tokenizer_path: artifacts/model_trainer/pegasus-samsum-tokenizer
+  # --- THE FIX IS HERE ---
+  # We changed these from "artifacts/..." to "google/pegasus-cnn_dailymail"
+  # This tells the app to use the pre-trained model from the internet
+  model_path: google/pegasus-cnn_dailymail
+  tokenizer_path: google/pegasus-cnn_dailymail
+  # -----------------------
   metric_file_name: artifacts/model_evaluation/metrics.csv
